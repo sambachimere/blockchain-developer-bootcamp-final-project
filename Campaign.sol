@@ -1,46 +1,54 @@
-pragma solidity ^0.4.17;
-
-contract CampaignFactory {
-    function createCampaign() public {
-        // Create a new campaign
-    }
-
-    function getDeployedCampaigns() public view {
-        // Get all deployeds campaigns
-    }
-}
+pragma solidity >=0.7.0 <0.9.0;
 
 contract Campaign {
+    struct Request {
+            string description;
+            uint value;
+            address recipient;
+            bool complete;
+            uint approvalCount;
+            mapping(address => bool) approvals;
+    }
+
+    Request[] public requests;
+    address public manager;
+    uint public minimumContribution;
+    mapping(address => bool) public approvers;
+
     modifier restricted() {
-        // Restrict some function calls to the creator of the campaign
+            require(msg.sender == manager);
+            _;
     }
-
-    function Campaign() public {
-        // Set a new campaign
+    
+    constructor(uint minimum) public {
+            manager = msg.sender;
+            minimumContribution = minimum;
     }
-
+    
     function contribute() public payable {
-        // Allow user to contribute to a campaign
+            require(msg.value > minimumContribution);
+            
+            approvers[msg.sender] = true;
     }
-
-    function createRequest() public restricted {
-        // Creator of the campaign can create a request to use the collected money
-        // This request should be validated by a majority of contributors
+    
+    function createRequest(string memory description, uint value, address recipient) public restricted {            
+            Request storage newRequest = requests.push();
+        
+            newRequest.description = description;
+            newRequest.value = value;
+            newRequest.recipient = recipient;
+            newRequest.complete = false;
+            newRequest.approvalCount = 0;
     }
+    
+    function approveRequest(uint index) public {
+            Request storage request = requests[index];
 
-    function approveRequest() public {
-        // Contributors can approve a request made by the manager
-    }
-
-    function finalizeRequest() public restricted {
-        // Transfer the money to the creator of the campaign
-    }
-
-    function getSummary() public view {
-        // Allow to display a campaigns summary : creator, number of contributors, balance, number of requests [...]
-    }
-
-    function getRequestsCount() public view {
-        // Allow to get the number of requests
+            require(approvers[msg.sender]);
+            require(!request.approvals[msg.sender]);
+            
+            request.approvals[msg.sender] = true;
+            request.approvalCount++;
     }
 }
+
