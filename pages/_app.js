@@ -1,28 +1,28 @@
-import '../styles/globals.css';
 import Link from 'next/link';
+
+import { Container, Navbar, Title, NavItems, NavItem } from '../styles/app.style';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="bg-black">
-      <nav className="border-b p-6">
-        <p className="text-4xl text-white font-bold">kem marketplace</p>
-        <div className="flex mt-4">
-          <Link href="/">
-            <a className="mr-4 text-yellow-500">HOME</a>
-          </Link>
-          <Link href="/create-item">
-            <a className="mr-6 text-yellow-500">SELL DIGITAL ASSET</a>
+    <Container>
+      <Navbar>
+        <Link href="/">
+          <Title>ankh</Title>
+        </Link>
+        <NavItems>
+          <Link href="/create-nft">
+            <NavItem>SELL DIGITAL ASSET</NavItem>
           </Link>
           <Link href="/my-assets">
-            <a className="mr-6 text-yellow-500">MY DIGITAL ASSETS</a>
+            <NavItem>MY DIGITAL ASSETS</NavItem>
           </Link>
           <Link href="/creator-dashboard">
-            <a className="mr-6 text-yellow-500">CREATOR DASHBOARD</a>
+            <NavItem>CREATOR DASHBOARD</NavItem>
           </Link>
-        </div>
-      </nav>
-      <Component {...pageProps} />
-    </div>
+        </NavItems>
+      </Navbar>
+      <Component className="bg-black" {...pageProps} />
+    </Container>
   );
 }
 

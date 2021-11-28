@@ -1,26 +1,21 @@
-/* hardhat.config.js */
-require("@nomiclabs/hardhat-waffle")
-const fs = require('fs')
-const privateKey = fs.readFileSync(".secret").toString().trim() || "01234567890123456789"
+require('@nomiclabs/hardhat-waffle');
+const fs = require('fs');
+const privateKey = fs.readFileSync('.secret').toString();
+const projectId = '9c82b810040b47e7b272d06040e5ccaf';
 
 module.exports = {
-  defaultNetwork: "hardhat",
   networks: {
     hardhat: {
-      chainId: 1337
+      chainId: 1337,
     },
     mumbai: {
-      url: "https://rpc-mumbai.matic.today",
-      accounts: [privateKey]
-    }
+      url: `https://polygon-mumbai.infura.io/v3/${projectId}`,
+      accounts: [privateKey],
+    },
+    mainnet: {
+      url: `https://mainnet.infura.io/v3/${projectId}`,
+      accounts: [privateKey],
+    },
   },
-  solidity: {
-    version: "0.8.4",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200
-      }
-    }
-  }
-}
+  solidity: '0.8.4',
+};
