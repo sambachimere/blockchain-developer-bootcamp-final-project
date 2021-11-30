@@ -15,6 +15,8 @@ You can:
 
 ## Screencast link
 
+https://www.loom.com/share/2ecbb109b9eb4a24a64383f2ad4a9760
+
 ## Deployed version url:
 
 I encountered some issues, it will be deployed soon
