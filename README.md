@@ -1,15 +1,11 @@
-# Basic Sample Hardhat Project
+## Ankh
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+This project is a nft marketplace specialized in african arts, build with [Next.js](https://nextjs.org/) and [Hardhat](https://hardhat.org/).
 
-Try running some of the following tasks:
+The smart contracts are accessible in the folder './contracts'.
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+The frontend is accessible in the folder './pages'.
+
+Here is the deployed frontend :
+
+I would to receive my certification at this address : 0x75f3769bBA94eC593dc5935d07E51B121820D1C0
