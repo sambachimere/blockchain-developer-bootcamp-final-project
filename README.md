@@ -1,6 +1,6 @@
 ## Ankh
 
-This project is a nft marketplace specialized in african arts, build with [Next.js](https://nextjs.org/) and Hardhat(https://hardhat.org/).
+This project is a nft marketplace specialized in african arts, build with [Next.js](https://nextjs.org/) and [Hardhat](https://hardhat.org/).
 
 The smart contracts are accessible in the folder './contracts'.
 
