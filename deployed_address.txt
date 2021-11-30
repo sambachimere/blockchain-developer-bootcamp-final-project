@@ -1,2 +1,3 @@
-Address: 
+nftMarket deployed to: 0x60d5C00d0515c785C6E1dD24ccf06562ff51de4E
+nft deployed to: 0x248882308e9448c7c56aEE8BD8EF0CD22faf091d
 Network: mumbai (Polygon testnet)
