@@ -30,7 +30,7 @@ export default function MyAssets() {
   useEffect(() => {
     loadNfts();
     console.log('My nfts: ', nfts);
-  }, []);
+  }, [nfts]);
 
   async function loadNfts() {
     const web3Modal = new Web3Modal({
