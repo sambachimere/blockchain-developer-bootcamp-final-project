@@ -1,40 +1,42 @@
 const { ethers } = require('hardhat');
 
 describe('NftMarket', function () {
-  it('Should create and execute market sales', async function () {
-    // deploy the marketplace
+  let market;
+  let marketAddress;
+  let nft;
+  let nftContractAddress;
+  it('should deploy the marketplace', async function () {
     const NftMarket = await ethers.getContractFactory('NftMarket');
-    const market = await NftMarket.deploy();
+    market = await NftMarket.deploy();
     await market.deployed();
-    const marketAddress = market.address;
-
-    // deploy the NFT contract
+    marketAddress = market.address;
+  });
+  it('should deploy the NFT contract', async function () {
     const Nft = await ethers.getContractFactory('Nft');
-    const nft = await Nft.deploy(marketAddress);
+    nft = await Nft.deploy(marketAddress);
     await nft.deployed();
-    const nftContractAddress = nft.address;
-
+    nftContractAddress = nft.address;
+  });
+  it('should create two tokens', async function () {
+    await nft.createNft('https://www.mytokenlocation.com');
+    await nft.createNft('https://www.mytokenlocation2.com');
+  });
+  it('should put both tokens for sale and execute sale to another user', async function () {
     let listingPrice = await market.getListingPrice();
     listingPrice = listingPrice.toString();
 
     const auctionPrice = ethers.utils.parseUnits('1', 'ether');
 
-    // create two tokens
-    await nft.createNft('https://www.mytokenlocation.com');
-    await nft.createNft('https://www.mytokenlocation2.com');
-
-    // put both tokens for sale
     await market.createMarketNft(nftContractAddress, 1, auctionPrice, { value: listingPrice });
     await market.createMarketNft(nftContractAddress, 2, auctionPrice, { value: listingPrice });
 
     const [_, buyerAddress] = await ethers.getSigners();
 
-    // execute sale of token to another user
     await market
       .connect(buyerAddress)
       .createMarketSale(nftContractAddress, 1, { value: auctionPrice });
-
-    // query for and return the unsold nfts
+  });
+  it('should query for and return the unsold nfts', async function () {
     nfts = await market.fetchMarketNfts();
     nfts = await Promise.all(
       nfts.map(async (i) => {
@@ -49,6 +51,5 @@ describe('NftMarket', function () {
         return item;
       })
     );
-    console.log('nfts: ', nfts);
   });
 });
