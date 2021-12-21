@@ -5,8 +5,10 @@ import Web3Modal from 'web3modal';
 
 import { nftaddress, nftmarketaddress } from '../config';
 
-import Nft from '../artifacts/contracts/Nft.sol/Nft.json';
-import NftMarket from '../artifacts/contracts/NftMarket.sol/NftMarket.json';
+// import Nft from '../artifacts/contracts/Nft.sol/Nft.json';
+import Nft from '../abi/Nft.json';
+// import NftMarket from '../artifacts/contracts/NftMarket.sol/NftMarket.json';
+import NftMarket from '../abi/NftMarket.json';
 
 //* Styles
 import {
